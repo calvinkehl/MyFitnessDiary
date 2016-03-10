@@ -13,8 +13,9 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 	<div class="page-header" style="text-align: center;">
-  		<h1>Wiklommen bei My Fitness Diary!</h1>
+  		<h1>Wilkommen bei My Fitness Diary!</h1>
   		<h3>alle Ihre eingetragene Daten auch über unseren Webapplikation anschaubar und änderbar</h3>
 	</div>
 	<div class="container">
@@ -40,7 +41,7 @@
 			<div class="from-group">
 				<button type="submit" class="btn btn-default">Log In</button>
 				<br></br>
-				<a href="registration.php" type="button" class="btn btn-link">Registrieren</a>
+				<a href="registration.php" type="button" class="btn btn-link">Registrieren</a>	
 			</div>
 		</form>
 	</div>

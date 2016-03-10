@@ -1,7 +1,11 @@
-body {
-	background-image:url(img/background.jpeg);
+body { 
+	background: url(../fitness.jpeg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	color: white; /*ist weiss*/
 }
-
 .center {
 	margin: 0 auto;
 	align: center;
@@ -10,4 +14,8 @@ body {
 
 .formwrap {
 	width: 50%;
+}
+
+.btn-link {
+	color: white;
 }
