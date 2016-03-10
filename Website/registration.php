@@ -40,7 +40,7 @@
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Email Adresse*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" id="email" placeholder="Enter password">
+	      			<input type="password" class="form-control" id="email" placeholder="Enter e-Mail Adress">
 	    		</div>
 	  		</div>
 	  		<div class="form-group"> 
