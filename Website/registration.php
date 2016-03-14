@@ -22,7 +22,7 @@
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="email">Username*:</label>
 	    		<div class="col-sm-8">
-	      			<input type="email" class="form-control" id="name" placeholder="Enter email">
+	      			<input type="username" class="form-control" id="name" placeholder="Enter username">
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
@@ -34,13 +34,13 @@
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Passwort wiederholen*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" id="pwdrep" placeholder="Enter password">
+	      			<input type="password" class="form-control" id="pwdrep" placeholder="Repeat password">
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Email Adresse*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" id="email" placeholder="Enter e-Mail Adress">
+	      			<input type="email" class="form-control" id="email" placeholder="Enter e-Mail Adress">
 	    		</div>
 	  		</div>
 	  		<div class="form-group"> 
