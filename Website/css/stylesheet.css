@@ -19,3 +19,21 @@ body {
 .btn-link {
 	color: white;
 }
+
+#nav-container {
+	opacity: 1;
+	transition: opacity 1s;
+}
+
+#nav-container.fixed {
+	opacity: 0.8;
+	width:100%;
+	position: fixed;
+	top:0;
+	z-index: 99;
+}
+
+#placeholder {
+	height:500px;
+	background: red;
+}

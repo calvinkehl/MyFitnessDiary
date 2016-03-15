@@ -15,7 +15,7 @@
 	<!-- In das nachstehende Div werden die Beiträge per Javascript eingefügt -->
 </head>
 <body>
-
+<div id="nav-container">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -31,6 +31,7 @@
     </ul>
   </div>
 </nav>
+</div>
 <div class="page-header" style="text-align: center;">
   		<h1>Wilkommen bei My Fitness Diary!</h1>
   		<h3>auf unsere Home-Seite können Sie alle Neuheiten aus dem Fitness-Leben miterleben.</h3>
@@ -68,8 +69,14 @@ function rss2html($url,$anz) {
 		
 				</form>
 			</div>
+      <div id="placeholder">
+      </div>
 		</div>
 	</div>
 </div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <script src="js/index.js"></script>
+
 </body>
 </html>
