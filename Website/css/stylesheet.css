@@ -33,6 +33,19 @@ body {
 	z-index: 99;
 }
 
+#overview {
+	color:black;
+	background: #EEE;
+	height:100%;
+}
+
+#datepicker {
+	display: inline-block;
+	border-radius: 4px;
+	background: #EEE;
+	color:black;
+}
+
 #placeholder {
 	height:500px;
 	background: red;

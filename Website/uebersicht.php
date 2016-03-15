@@ -11,6 +11,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- Bootstrap Date-Picker Plugin -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 </head>
 <body>
 
@@ -35,9 +38,40 @@
   		<h1>Übersicht Ihrer Trainings-Eintragen</h1>
 	</div>
 		<div class="container">
-      
-		</div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="table" id="overview">
+            <table class="table">
+              <tr>
+                <th>übung</th>
+                <th>Gerät</th>
+                <th>Gewicht</th>
+                <th>Wiederholungen</th>
+              </tr>
+              <tr>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div id="datepicker"></div>
+        </div>
+		  </div>
+    </div>
 	</div>
 </div>
+<script>
+    var date_input=$('#datepicker'); //our date input has the name "date" (input[name="date"])
+    var container=$('.container').length>0 ? $('.container').parent() : "body";
+    var options={
+        format: 'mm/dd/yyyy',
+        todayHighlight: true,
+        autoclose: true,
+    };
+    date_input.datepicker(options); //initiali110/26/2015 8:20:59 PM ze plugin
+</script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <script src="js/index.js"></script>
 </body>
 </html>

@@ -22,9 +22,9 @@
 	<div class="formwrap center">
 		<form class="form-horizontal" role="form">
 			<div class="form-group">
-	    		<label class="control-label col-sm-4" for="email">Username:</label>
+	    		<label class="control-label col-sm-4" for="user">Username:</label>
 	    		<div class="col-sm-8">
-	      			<input type="email" class="form-control" id="name" placeholder="Enter username">
+	      			<input type="user" class="form-control" id="name" placeholder="Enter username">
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
