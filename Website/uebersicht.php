@@ -35,13 +35,7 @@
   		<h1>Übersicht Ihrer Trainings-Eintragen</h1>
 	</div>
 		<div class="container">
-			<div class="fromwrap center">
-				<form class="form-horizontal" role="form">
-
-
-
-				</form>
-			</div>
+      
 		</div>
 	</div>
 </div>
