@@ -19,17 +19,17 @@
   		<h3>alle Ihre eingetragene Daten auch über unseren Webapplikation anschaubar und änderbar</h3>
 	</div>
 	<div class="container">
-	<div class="fromwrap center">
+	<div class="formwrap center">
 		<form class="form-horizontal" role="form">
 			<div class="form-group">
 	    		<label class="control-label col-sm-4" for="email">Username:</label>
-	    		<div class="col-sm-4">
+	    		<div class="col-sm-8">
 	      			<input type="email" class="form-control" id="name" placeholder="Enter username">
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Passwort:</label>
-	    		<div class="col-sm-4"> 
+	    		<div class="col-sm-8"> 
 	      			<input type="password" class="form-control" id="pwd" placeholder="Enter password">
 	    		</div>
 	  		</div>
