@@ -33,8 +33,8 @@
 				) LIMIT 1;",
 				$mysqli->real_escape_string($_POST['f']['username']),
 				$mysqli->real_escape_string($_POST['f']['password']),
-				$mysqli->real_escape_string($_POST['f']['username']),
-				$mysqli->real_escape_string($_POST['f']['email'])
+				$mysqli->real_escape_string($_POST['f']['email']),
+				$mysqli->real_escape_string($_POST['f']['username'])
 			);
 			$mysqli->query($query);
 			if ($mysqli->affected_rows == 1) {
@@ -80,29 +80,29 @@
 				<fieldset class="alert alert-info"><strong>Hinweis! </strong><?php echo $message['notice'] ?></fieldset>
 			<?php endif; ?>
 	  		<div class="form-group">
-	    		<label class="control-label col-sm-4" for="username">Username*:</label>
+	    		<label class="control-label col-sm-4" for="username">Benutzername*:</label>
 	    		<div class="col-sm-8">
-	      			<input type="text" class="form-control" placeholder="Enter Username" name="f[username]" id="username"<?php echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> />
+	      			<input type="text" class="form-control" placeholder="Benutzername eingeben" name="f[username]" id="username"<?php echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> />
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
-	    		<label class="control-label col-sm-4" for="pwd">Passwort*:</label>
+	    		<label class="control-label col-sm-4" for="password">Passwort*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" placeholder="Enter Password" name="f[password]" id="password" />
+	      			<input type="password" class="form-control" placeholder="Passwort eingeben" name="f[password]" id="password" />
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
-	    		<label class="control-label col-sm-4" for="pwd">Passwort wiederholen*:</label>
+	    		<label class="control-label col-sm-4" for="password_again">Passwort wiederholen*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" placeholder="Repeat Password" name="f[password_again]" id="password_again" />
+	      			<input type="password" class="form-control" placeholder="Passwort wiederholen" name="f[password_again]" id="password_again" />
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
-	    		<label class="control-label col-sm-4" for="pwd">Email Adresse*:</label>
+	    		<label class="control-label col-sm-4" for="email">Email Adresse*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="email" class="form-control" placeholder="Enter e-Mail Adress" name="f[email]" id="email">
+	      			<input type="email" class="form-control" placeholder="Email Adresse eingeben" name="f[email]" id="email">
 	    		</div>
-	  		</div>
+	  		</div> 
 	  		<div class="form-group"> 
 	    		<div class="col-sm-offset-4 col-sm-8">
 	      			<button type="submit" class="btn btn-default" name="submit"><span class="glyphicon glyphicon-send"></span> Abschicken</button>
