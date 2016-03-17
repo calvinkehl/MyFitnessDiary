@@ -1,3 +1,54 @@
+<?php
+	$message = array();
+	if (!empty($_POST)) {
+		if (
+			empty($_POST['f']['username']) ||
+			empty($_POST['f']['password']) ||
+			empty($_POST['f']['password_again']) ||
+			empty($_POST['f']['email'])
+		) {
+			$message['error'] = 'Es wurden nicht alle Felder ausgefüllt.';
+		} else if ($_POST['f']['password'] != $_POST['f']['password_again']) {
+			$message['error'] = 'Die eingegebenen Passwörter stimmen nicht überein.';
+		} else {
+			unset($_POST['f']['password_again']);
+			$salt = ''; 
+			for ($i = 0; $i < 22; $i++) { 
+				$salt .= substr('./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', mt_rand(0, 63), 1); 
+			}
+			$_POST['f']['password'] = crypt(
+				$_POST['f']['password'],
+				'$2a$10$' . $salt
+			);
+ 
+			$mysqli = @new mysqli('localhost', 'root', '', 'MyFitnessDiary');
+			if ($mysqli->connect_error) {
+				$message['error'] = 'Datenbankverbindung fehlgeschlagen: ' . $mysqli->connect_error;
+			}
+			$query = sprintf(
+				"INSERT INTO users (username, password, email)
+				SELECT * FROM (SELECT '%s', '%s', '%s') as new_user
+				WHERE NOT EXISTS (
+					SELECT username FROM users WHERE username = '%s'
+				) LIMIT 1;",
+				$mysqli->real_escape_string($_POST['f']['username']),
+				$mysqli->real_escape_string($_POST['f']['password']),
+				$mysqli->real_escape_string($_POST['f']['username']),
+				$mysqli->real_escape_string($_POST['f']['email'])
+			);
+			$mysqli->query($query);
+			if ($mysqli->affected_rows == 1) {
+				$message['success'] = 'Neuer Benutzer (' . htmlspecialchars($_POST['f']['username']) . ') wurde angelegt, <a href="login.php">weiter zur Anmeldung</a>.';
+				header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login.php');
+			} else {
+				$message['error'] = 'Der Benutzername ist bereits vergeben.';
+			}
+			$mysqli->close();
+		}
+	} else {
+		$message['notice'] = 'Übermitteln Sie das ausgefüllte Formular um ein neues Benutzerkonto zu erstellen.';
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,38 +69,48 @@
   	</div>
   	<div class="container">
   	<div class="formwrap center">
-	  	<form class="form-horizontal" role="form">
+	  	<form class="form-horizontal" role="form" action="./registration.php" method="post">
+	  		<?php if (isset($message['error'])): ?>
+				<fieldset class="alert alert-danger"><strong>Fehler! </strong><?php echo $message['error'] ?></fieldset>
+			<?php endif;
+				if (isset($message['success'])): ?>
+				<fieldset class="alert alert-success"><strong>Erfolg! </strong><?php echo $message['success'] ?></fieldset>
+			<?php endif;
+				if (isset($message['notice'])): ?>
+				<fieldset class="alert alert-info"><strong>Hinweis! </strong><?php echo $message['notice'] ?></fieldset>
+			<?php endif; ?>
 	  		<div class="form-group">
-	    		<label class="control-label col-sm-4" for="email">Username*:</label>
+	    		<label class="control-label col-sm-4" for="username">Username*:</label>
 	    		<div class="col-sm-8">
-	      			<input type="username" class="form-control" id="name" placeholder="Enter username">
+	      			<input type="text" class="form-control" placeholder="Enter Username" name="f[username]" id="username"<?php echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> />
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Passwort*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" id="pwd" placeholder="Enter password">
+	      			<input type="password" class="form-control" placeholder="Enter Password" name="f[password]" id="password" />
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Passwort wiederholen*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="password" class="form-control" id="pwdrep" placeholder="Repeat password">
+	      			<input type="password" class="form-control" placeholder="Repeat Password" name="f[password_again]" id="password_again" />
 	    		</div>
 	  		</div>
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Email Adresse*:</label>
 	    		<div class="col-sm-8"> 
-	      			<input type="email" class="form-control" id="email" placeholder="Enter e-Mail Adress">
+	      			<input type="email" class="form-control" placeholder="Enter e-Mail Adress" name="f[email]" id="email">
 	    		</div>
 	  		</div>
 	  		<div class="form-group"> 
 	    		<div class="col-sm-offset-4 col-sm-8">
-	      			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-send"></span> Abschicken</button>
+	      			<button type="submit" class="btn btn-default" name="submit"><span class="glyphicon glyphicon-send"></span> Abschicken</button>
 	    		</div>
 	  		</div>
 		</form>
 	</div>
+  	</form>
   	</div>
 </body>
 </html>
