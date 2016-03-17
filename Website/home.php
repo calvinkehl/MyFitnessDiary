@@ -1,14 +1,4 @@
-<?php
-session_start();
-include_once 'dbconnect.php';
-
-if(!isset($_SESSION['user']))
-{
- header("Location: login.php");
-}
-$res=mysql_query("SELECT * FROM Users WHERE user_id=".$_SESSION['user']);
-$userRow=mysql_fetch_array($res);
-?>
+<?php require_once './auth.php'; ?>
 <!DOCTYPE html>
 <html lang="de_DE">
 <head>
@@ -26,6 +16,7 @@ $userRow=mysql_fetch_array($res);
 	<!-- In das nachstehende Div werden die Beiträge per Javascript eingefügt -->
 </head>
 <body>
+<?php echo $login_status; ?>
 <div id="nav-container">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
