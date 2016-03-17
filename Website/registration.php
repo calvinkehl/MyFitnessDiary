@@ -39,7 +39,7 @@
 			$mysqli->query($query);
 			if ($mysqli->affected_rows == 1) {
 				$message['success'] = 'Neuer Benutzer (' . htmlspecialchars($_POST['f']['username']) . ') wurde angelegt, <a href="login.php">weiter zur Anmeldung</a>.';
-				header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login.php');
+				header('Location: login.php');
 			} else {
 				$message['error'] = 'Der Benutzername ist bereits vergeben.';
 			}
