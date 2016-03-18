@@ -41,7 +41,7 @@ if (isset($_SESSION['login'])) {
 		}
 	} else {
 		$message['notice'] = 'Geben Sie Ihre Zugangsdaten ein um sich anzumelden.<br />' .
-			'Wenn Sie noch kein Konto haben, gehen Sie <a href="./register.php">zur Registrierung</a>.';
+			'Wenn Sie noch kein Konto haben, gehen Sie <a href="registration.php">zur Registrierung</a>.';
 	}
 }
 ?>
@@ -80,9 +80,8 @@ if (isset($_SESSION['login'])) {
 			<?php endif; ?>
 	    		<label class="control-label col-sm-4" for="username">Benutzername:</label>
 	    		<div class="col-sm-8">
-	      			<input type="user" class="form-control" name="f[username]" id="username" placeholder="Enter username"><?php 
-					echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?>
-	    		</div>
+	      			<input type="user" class="form-control" name="f[username]" id="username" placeholder="Enter username">    	
+	    	</div>
 	  		</div>
 	  		<div class="form-group">
 	    		<label class="control-label col-sm-4" for="pwd">Passwort:</label>
