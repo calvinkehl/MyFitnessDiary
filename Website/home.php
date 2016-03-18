@@ -23,12 +23,12 @@
       <a class="navbar-brand">My Fitness Diary</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="home.php">Home</a></li>
-      <li><a href="uebersicht.php">Übersicht</a></li>
-      <li><a href="statistik.php">Statistik</a></li>
+      <li class="active"><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+      <li><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
+      <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href=""><?php echo $_SESSION['user']['username'];?></a></li>
+      <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
     </ul>
   </div>
