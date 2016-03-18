@@ -1,3 +1,4 @@
+<?php require_once './auth.php'; ?>
 <!DOCTYPE html>
 <html lang="de_DE">
 <head>
@@ -29,6 +30,7 @@
       <li><a href="statistik.php">Statistik</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href=""><?php echo $_SESSION['user']['username'];?></a></li>
       <li><a href="login.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
     </ul>
   </div>
@@ -41,6 +43,9 @@
       <div class="row">
         <div class="col-md-8">
           <div class="table" id="overview">
+            <form method="POST">
+              <input name="edit" type="submit" value="Edit" />
+            </form>
             <table class="table">
               <tr>
                 <th>übung</th>
@@ -48,8 +53,69 @@
                 <th>Gewicht</th>
                 <th>Wiederholungen</th>
               </tr>
-              <tr>
-              </tr>
+                <?php 
+                  $mysqli = @new mysqli('localhost', 'root', '', 'MyFitnessDiary');
+                  if ($mysqli->connect_error) {
+                    $message['error'] = 'Datenbankverbindung fehlgeschlagen: ' . $mysqli->connect_error;
+                  } else {
+                    $query = sprintf(
+                      "SELECT * FROM data WHERE username = '%s'",
+                      $_SESSION['user']['username']
+                    );
+                    $result = $mysqli->query($query);
+                    if(!isset($_POST['edit'])) {
+                      if(empty($result)) {
+                        echo "<td>Keine Übungen eingetragen!</td>";
+                      } else {
+                        while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                          echo "<tr>";
+                          echo "<td>".$row['Uebung']."</td>";
+                          echo "<td>".$row['Geraet']."</td>";
+                          echo "<td>".$row['Gewicht']."</td>";
+                          echo "<td>".$row['Wiederholungen']."</td>";
+                          echo "</tr>";
+                        }
+                      }
+                    } else {
+                      echo "<form action=\"save.php\" method=\"get\">";
+                      if(empty($result)) {
+                        addEmptyFields();
+                      } else {
+                        $_SESSION['i'] = 0;
+                        while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                          echo "<tr>";
+                          echo "<td><input name=\"uebung".$_SESSION['i']."\" type=\"text\" value=".$row['Uebung']."></input></td>";
+                          echo "<td><input name=\"geraet".$_SESSION['i']."\" type=\"text\" value=".$row['Geraet']."></input></td>";
+                          echo "<td><input name=\"gewicht".$_SESSION['i']."\" type=\"text\" value=".$row['Gewicht']."></input></td>";
+                          echo "<td><input name=\"wiederholungen".$_SESSION['i']."\" type=\"text\" value=".$row['Wiederholungen']."></input></td>";
+                          echo "</tr>";
+                          $_SESSION['i']++;
+                        }
+                        echo "<tr>";
+                        echo "</form>";
+                        echo "<td><button name=\"add\" onclick=\"addEmptyFields()\" value=\"+\"></button></td>";
+                        echo "<td></td>";
+                        echo "<form method=\"get\">";
+                        echo "<td><input name=\"save\" type=\"submit\" value=\"Speichern\"></input></td>";
+                        echo "<td><input name=\"discard\" action=\"discard.php\" type=\"submit\" value=\"Abbrechen\"></input></td>";
+                        echo "</form>";
+                        echo "</tr>";
+                      }
+                      echo "</form>";
+                    }
+                  }
+
+                  function addEmptyFields() {
+                    echo "<tr>";
+                    echo "<td><input name=\"uebung".$_SESSION['i']."\" type=\"text\"></input></td>";
+                    echo "<td><input name=\"geraet".$_SESSION['i']."\" type=\"text\"></input></td>";
+                    echo "<td><input name=\"gewicht".$_SESSION['i']."\" type=\"text\"></input></td>";
+                    echo "<td><input name=\"wiederholungen".$_SESSION['i']."\" type=\"text\"></input></td>";
+                    echo "</tr>";
+                    $_SESSION['i']++;
+                    return;
+                  }
+                ?>
             </table>
           </div>
         </div>

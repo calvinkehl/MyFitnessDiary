@@ -16,7 +16,6 @@
 	<!-- In das nachstehende Div werden die Beiträge per Javascript eingefügt -->
 </head>
 <body>
-<?php echo $login_status; ?>
 <div id="nav-container">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -29,7 +28,8 @@
       <li><a href="statistik.php">Statistik</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+      <li><a href=""><?php echo $_SESSION['user']['username'];?></a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
     </ul>
   </div>
 </nav>

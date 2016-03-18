@@ -3,7 +3,7 @@
 	session_regenerate_id();
  
 	if (empty($_SESSION['login'])) {
-		header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login.php');
+		header('Location: login.php');
 		exit;
 	} else {
 		$login_status = '
