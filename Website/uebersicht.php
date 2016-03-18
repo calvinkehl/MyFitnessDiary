@@ -52,6 +52,7 @@
                 <th>Gerät</th>
                 <th>Gewicht</th>
                 <th>Wiederholungen</th>
+                <input id="date" type="hidden" />
               </tr>
                 <?php 
                   $mysqli = @new mysqli('localhost', 'root', '', 'MyFitnessDiary');
@@ -77,10 +78,11 @@
                         }
                       }
                     } else {
-                      echo "<form action=\"save.php\" method=\"get\">";
                       if(empty($result)) {
+                        echo "<form action=\"save.php\" method=\"get\">";
                         addEmptyFields();
                       } else {
+                        echo "<form action=\"save.php\" method=\"get\">";
                         $_SESSION['i'] = 0;
                         while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                           echo "<tr>";
@@ -91,14 +93,12 @@
                           echo "</tr>";
                           $_SESSION['i']++;
                         }
+                        addEmptyFields();
                         echo "<tr>";
-                        echo "</form>";
                         echo "<td><button name=\"add\" onclick=\"addEmptyFields()\" value=\"+\"></button></td>";
                         echo "<td></td>";
-                        echo "<form method=\"get\">";
-                        echo "<td><input name=\"save\" type=\"submit\" value=\"Speichern\"></input></td>";
+                        echo "<td><input name=\"save\" action=\"save.php\" type=\"submit\" value=\"Speichern\"></input></td>";
                         echo "<td><input name=\"discard\" action=\"discard.php\" type=\"submit\" value=\"Abbrechen\"></input></td>";
-                        echo "</form>";
                         echo "</tr>";
                       }
                       echo "</form>";
@@ -113,14 +113,13 @@
                     echo "<td><input name=\"wiederholungen".$_SESSION['i']."\" type=\"text\"></input></td>";
                     echo "</tr>";
                     $_SESSION['i']++;
-                    return;
                   }
                 ?>
             </table>
           </div>
         </div>
         <div class="col-md-4">
-          <div id="datepicker"></div>
+          <div id="datepicker" data-date="<script>document.getElementById('date').value;</script>"></div>
         </div>
 		  </div>
     </div>
@@ -135,9 +134,20 @@
         autoclose: true,
     };
     date_input.datepicker(options); //initiali110/26/2015 8:20:59 PM ze plugin
+    date_input.datepicker().on('changeDate', function(ev) {
+      var element = document.getElementById('date');
+      var year = ev.date.getFullYear();
+      var month = ev.date.getMonth();
+      var day = ev.date.getDate();
+      if(month < 10) { month = "0"+month;}
+      if(day <10) { day = "0"+day;}
+      var date = year+"-"+month+"-"+day;
+      element.value = date;
+
+      $.post("uebersicht.php", { date: date });
+    })
 </script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-        <script src="js/index.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

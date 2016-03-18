@@ -8,16 +8,21 @@
 		$query = sprintf("DELETE FROM data WHERE Username = '".$_SESSION['user']['username']."';");
 		$mysqli->query($query);
 		while ($i < $_SESSION['i']) {
-			$query = sprintf(
-				"INSERT INTO data (Uebung, Geraet, Gewicht, Wiederholungen, Username)
-				VALUES ('%s', '%s', '%s', '%s', '%s');",
-				$mysqli->real_escape_string($_GET['uebung'.$i]),
-				$mysqli->real_escape_string($_GET['geraet'.$i]),
-				$mysqli->real_escape_string($_GET['gewicht'.$i]),
-				$mysqli->real_escape_string($_GET['wiederholungen'.$i]),
-				$mysqli->real_escape_string($_SESSION['user']['username'])
-			);
-			$mysqli->query($query);
+			if(!empty($_GET['uebung'.$i]) &&
+			 	!empty($_GET['geraet'.$i]) &&
+				!empty($_GET['gewicht'.$i]) &&
+				!empty($_GET['wiederholungen'.$i])) {
+				$query = sprintf(
+					"INSERT INTO data (Uebung, Geraet, Gewicht, Wiederholungen, Username)
+					VALUES ('%s', '%s', '%s', '%s', '%s');",
+					$mysqli->real_escape_string($_GET['uebung'.$i]),
+					$mysqli->real_escape_string($_GET['geraet'.$i]),
+					$mysqli->real_escape_string($_GET['gewicht'.$i]),
+					$mysqli->real_escape_string($_GET['wiederholungen'.$i]),
+					$mysqli->real_escape_string($_SESSION['user']['username'])
+				);
+				$mysqli->query($query);
+			}
 			$i++;
 		}
 	}
