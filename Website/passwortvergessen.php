@@ -16,20 +16,21 @@ function random_string() {
 }
  
  
-$showForm = true;
+//$showForm = true;
  
 if(isset($_GET['send']) ) {
 	if(!isset($_POST['email']) || empty($_POST['email'])) {
-		$error = "<b>Bitte eine E-Mail-Adresse eintragen</b>";
+		$message['error'] = 'Bitte eine E-Mail-Adresse eintragen';
 	} else {
 		$statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
 		$result = $statement->execute(array('email' => $_POST['email']));
 		$user = $statement->fetch();		
  
 		if($user === false) {
-			$error = "<b>Kein Benutzer gefunden</b>";
+			$message['error'] = 'Kein Benutzer gefunden';
 		} else {
 			//Überprüfe, ob der User schon einen Passwortcode hat oder ob dieser abgelaufen ist 
+			$message['success'] = 'Ein Link um dein Passwort zurückzusetzen wurde an deine E-Mail-Adresse gesendet.';
 			$passwortcode = random_string();
 			$statement = $pdo->prepare("UPDATE users SET passwortcode = :passwortcode, passwortcode_time = NOW() WHERE id = :userid");
 			$result = $statement->execute(array('passwortcode' => sha1($passwortcode), 'userid' => $user['id']));
@@ -49,13 +50,13 @@ dein MyFitnessDiary-Team';
 			 
 			mail($empfaenger, $betreff, $text, $from);
  
-			echo "Ein Link um dein Passwort zurückzusetzen wurde an deine E-Mail-Adresse gesendet.";	
-			$showForm = false;
+			//echo "Ein Link um dein Passwort zurückzusetzen wurde an deine E-Mail-Adresse gesendet.";	
+			//$showForm = false;
 		}
 	}
 }
  
-if($showForm):
+//if($showForm):
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +81,15 @@ if($showForm):
 	<div class="container">
 	<div class="formwrap center">
 		<form class="form-horizontal" role="form" action="?send=1" method="post">
+			<?php if (isset($message['error'])): ?>
+				<fieldset class="alert alert-danger"><strong>Fehler! </strong><?php echo $message['error'] ?></fieldset>
+			<?php endif;
+				 if (isset($message['success'])): ?>
+			<fieldset class="alert alert-success"><strong>Erfolg! </strong><?php echo $message['success'] ?></fieldset>
+			<?php endif;
+				 if (isset($message['notice'])): ?>
+			<fieldset class="alert alert-info"><strong>Hinweis! </strong><?php echo $message['notice'] ?></fieldset>
+			<?php endif; ?>
  			<div class="form-group">
 	    		<label class="control-label col-sm-4" for="email">Email:</label>
 	    		<div class="col-sm-8">
@@ -99,5 +109,5 @@ if($showForm):
 </body>
 </html>
 <?php
-endif; //Endif von if($showForm)
+//endif; //Endif von if($showForm)
 ?>

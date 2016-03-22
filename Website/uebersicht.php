@@ -44,7 +44,7 @@
         <div class="col-md-8">
           <div class="table" id="overview">
             <form method="POST">
-              <input name="edit" type="submit" value="Edit" />
+              <input class="btn btn-primary" name="edit" type="submit" value="Edit" />
             </form>
             <table class="table">
               <tr>

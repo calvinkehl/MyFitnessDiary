@@ -7,10 +7,10 @@
 		exit;
 	} else {
 		$login_status = '
-			<div style="border: 1px solid black">
-				Sie sind als <strong>' . htmlspecialchars($_SESSION['user']['username']) . '</strong> angemeldet.<br />
-				<a href="./logout.php">Sitzung beenden</a>
-			</div>
+    		<ul class="nav navbar-nav navbar-right">
+      			<li><a href=""><span class="glyphicon glyphicon-user"></span>'. htmlspecialchars($_SESSION['user']['username']).'</a></li>
+      			<li><a href="./logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+    		</ul>
 		';
 	}
 ?>

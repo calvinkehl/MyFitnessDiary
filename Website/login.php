@@ -97,8 +97,9 @@ if (isset($_SESSION['login'])) {
 			<div class="from-group">
 				<button type="submit" class="btn btn-default" name="submit">Anmelden</button>
 				<br></br>
-				<a href="registration.php" type="button" class="btn btn-link">Registrieren</a>	
-			</form>
+				<a href="registration.php" type="button" class="btn btn-link">Registrieren</a>
+				<br></br>
+				<a href="passwortvergessen.php" type="button" class="btn btn-link">Passwort vergessen</a>
 			</div>
 		</form>
 	</div>

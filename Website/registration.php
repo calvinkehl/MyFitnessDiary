@@ -106,6 +106,7 @@
 	  		<div class="form-group"> 
 	    		<div class="col-sm-offset-4 col-sm-8">
 	      			<button type="submit" class="btn btn-default" name="submit"><span class="glyphicon glyphicon-send"></span> Abschicken</button>
+	      			<button type="submit" class="btn btn-default" name="back" href="login.php"><span class="glyphicon glyphicon-log-in"></span> Zurück</button>
 	    		</div>
 	  		</div>
 		</form>

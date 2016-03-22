@@ -2,7 +2,7 @@
 $pdo = new PDO('mysql:host=localhost;dbname=MyFitnessDiary', 'root', '');
  
 if(!isset($_GET['userid']) || !isset($_GET['code'])) {
-	die("Leider wurde beim Aufruf dieser Website kein Code zum Zurücksetzen deines Passworts übermittelt");
+	$message['error'] = 'Leider wurde beim Aufruf dieser Website kein Code zum Zurücksetzen deines Passworts übermittelt' ;
 }
  
 $userid = $_GET['userid'];
@@ -15,11 +15,11 @@ $user = $statement->fetch();
  
 //Überprüfe dass ein Nutzer gefunden wurde und dieser auch ein Passwortcode hat
 if($user === null || $user['passwortcode'] === null) {
-	die("Es wurde kein passender Benutzer gefunden");
+	$message['error'] = 'Es wurde kein passender Benutzer gefunden';
 }
  
 if($user['passwortcode_time'] === null || strtotime($user['passwortcode_time']) < (time()-24*3600) ) {
-	die("Dein Code ist leider abgelaufen");
+	$message['error'] = 'Dein Code ist leider abgelaufen';
 }
  
  
@@ -35,14 +35,14 @@ if(isset($_GET['send'])) {
 	$passwort2 = $_POST['passwort2'];
 	
 	if($passwort != $passwort2) {
-		echo "Bitte identische Passwörter eingeben";
+		$message['error'] = 'Bitte identische Passwörter eingeben';
 	} else { //Speichere neues Passwort und lösche den Code
 		$passworthash = password_hash($passwort, PASSWORD_DEFAULT);
 		$statement = $pdo->prepare("UPDATE users SET password = :passworthash, passwortcode = NULL, passwortcode_time = NULL WHERE id = :userid");
 		$result = $statement->execute(array('passworthash' => $passworthash, 'userid'=> $userid ));
 		
 		if($result) {
-			die("Dein Passwort wurde erfolgreich geändert");
+			$message['success'] = 'Dein Passwort wurde erfolgreich geändert';
 		}
 	}
 }
@@ -68,27 +68,36 @@ if(isset($_GET['send'])) {
   		<h3>Hier bekommen Sie Ihren neuen Passwort!</h3>
 	</div>
 	<div class="container">
-	<div class="formwrap center">
-		<form class="form-horizontal" role="form" action="?send=1&amp;userid=<?php echo htmlentities($userid); ?>&amp;code=<?php echo htmlentities($code); ?>" method="post">
- 			<div class="form-group">
-	    	<label class="control-label col-sm-4" for="password">Bitte gib ein neues Passwort ein:</label>
-	    		<div class="col-sm-8">
-	      			<input type="password" class="form-control" name="passwort" placeholder="Passwort eingeben">    	
+		<div class="formwrap center">
+			<form class="form-horizontal" role="form" action="?send=1&amp;userid=<?php echo htmlentities($userid); ?>&amp;code=<?php echo htmlentities($code); ?>" method="post">
+ 				<?php if (isset($message['error'])): ?>
+				<fieldset class="alert alert-danger"><strong>Fehler! </strong><?php echo $message['error'] ?></fieldset>
+			<?php endif;
+				 if (isset($message['success'])): ?>
+			<fieldset class="alert alert-success"><strong>Erfolg! </strong><?php echo $message['success'] ?></fieldset>
+			<?php endif;
+				 if (isset($message['notice'])): ?>
+			<fieldset class="alert alert-info"><strong>Hinweis! </strong><?php echo $message['notice'] ?></fieldset>
+			<?php endif; ?>
+ 				<div class="form-group">
+	    			<label class="control-label col-sm-6" for="password">Bitte gib ein neues Passwort ein:</label>
+	    			<div class="col-sm-6">
+	      				<input type="password" class="form-control" name="passwort" placeholder="Passwort eingeben">    	
+	    			</div>
 	    		</div>
-	    	</div>
-	    	<div class="form-group">
-	    	<label class="control-label col-sm-4" for="email">Passwort erneut eingeben:</label>
-	    		<div class="col-sm-8">  	
-	    			<input type="password" class="form-control" name="passwort2" placeholder="Passwort wiederholen">  
-	    		</div>
-	  		</div>
-	  		<div class="form-group">
-	    		<div class="col-sm-8">  	
-	    			<input type="submit" class="form-control" class="btn btn-default" name="submit"></button>
-	    		</div>
-	    	</div> 
-		</form>
-	</div>
+	    		<div class="form-group">
+	    			<label class="control-label col-sm-6" for="email">Passwort erneut eingeben:</label>
+	    			<div class="col-sm-6">  	
+	    				<input type="password" class="form-control" name="passwort2" placeholder="Passwort wiederholen">  
+	    			</div>
+	  			</div>
+	  			<div class="form-group"> 
+	  				<div class="col-sm-12"> 	
+	    				<input type="submit" class="form-control" class="btn btn-default" name="submit">
+	    			</div>
+	    		</div> 
+			</form>
+		</div>
 	</div>
 </body>
 </html>
