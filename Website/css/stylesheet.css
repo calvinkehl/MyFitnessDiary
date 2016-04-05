@@ -4,7 +4,7 @@ body {
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-  	color: white; /*ist weiss*/
+  	/*color: white; /*ist weiss*/
 }
 .center {
 	margin: 0 auto;
@@ -31,6 +31,10 @@ body {
 	position: fixed;
 	top:0;
 	z-index: 99;
+}
+
+.page-header {
+	color:white;
 }
 
 #overview {
