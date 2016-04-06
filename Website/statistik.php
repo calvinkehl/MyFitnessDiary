@@ -45,88 +45,82 @@
             <div class="col-md-4">
                 <input type="text" class="span2" value="" id="dpd1"></input>
                 <input type="text" class="span2" value="" id="dpd2"></input>
-                <select id="uebungSelect">
-
+                <select id="uebungSelect" onchange="updateSelection()">
                 </select>
             </div>
             <div class="col-md-8">
                 <!-- line chart canvas element -->
-                <canvas id="buyers" width="600" height="400"></canvas>
+                <canvas id="stats" width="600" height="400"></canvas>
+                <div id="legend"></div>
             </div>
         </div>
     </div>
     <script>
-        document.getElementById('uebungSelect').innerHTML = "<option>Test</option>";
+      //Chart config
+      Chart.defaults.global.scaleFontColor = "#fff";
+      Chart.defaults.global.responsive = true;
+      Chart.defaults.global.scaleBeginAtZero = true;
+      //global variables
+      var nowTemp = new Date();
+      var year = nowTemp.getFullYear();
+      var month = nowTemp.getMonth()+1;
+      var day = nowTemp.getDate();  
+      if(month < 10) { month = "0"+month;}
+      if(day <10) { day = "0"+day;}
+      //initial values for chartData
+      var chartData = {
+        labels : [],
+        datasets : [
+          {
+            fillColor : "rgba(172,194,132,0.4)",
+            labelColor: "#fff",
+            strokeColor : "#ACC26D",
+            pointColor : "#fff",
+            pointStrokeColor : "#9DB86D",
+            data : []
+          }
+        ]
+      };
 
+      $.ajax({
+        url: 'ajaxPHPs/first_chart_data.php',
+        type: 'POST',
+        dataType: "json",
+        data: {}
+      }).done(function(data){
+          repaintChart(JSON.parse(data));
+      });
+      // get line chart canvas
+      var stats = (document.getElementById('stats').getContext('2d'));
+      // draw line chart
+      var statsLineChart = new Chart(stats).Line(chartData);
 
-        Chart.defaults.global.scaleFontColor = "#fff";
-        Chart.defaults.global.responsive = true;
-        var nowTemp = new Date();
-        var year = nowTemp.getFullYear();
-        var month = nowTemp.getMonth()+1;
-        var day = nowTemp.getDate();
-        if(month < 10) { month = "0"+month;}
-        if(day <10) { day = "0"+day;}
-        var buyerData = {
-                labels : ["Januar","Februar","März","April","Mai","Juni"],
-                datasets : [
-                {
-                    fillColor : "rgba(172,194,132,0.4)",
-                    labelColor: "#fff",
-                    strokeColor : "#ACC26D",
-                    pointColor : "#fff",
-                    pointStrokeColor : "#9DB86D",
-                    data : [203,156,99,251,305,247]
-                }
-                ]
-            };
-        $.ajax({
-                url: 'first_chart_data.php',
-                type: 'POST',
-                dataType: "json",
-                data: {
-                    year: year,
-                    month: month,
-                    day: day
-                }
-            }).done(function(data){
-                var obj = JSON.parse(data);
-                var i;
-                var labels = new Array(obj.length);
-                for(i=0;i<obj.length;i++) {
-                    labels[i] = obj[i].datum;
-                }
-                var data = new Array(obj.length);
-                for(i=0;i<obj.length;i++) {
-                    data[i] = obj[i].gewicht;
-                }
-                buyerData = {
-                    labels : labels,
-                    datasets : [
-                    {
-                        fillColor : "rgba(172,194,132,0.4)",
-                        labelColor: "#fff",
-                        strokeColor : "#ACC26D",
-                        pointColor : "#fff",
-                        pointStrokeColor : "#9DB86D",
-                        data : data
-                    }
-                    ]
-                }
-                buyersLineChart.destroy();
-                buyersLineChart = new Chart(buyers).Line(buyerData);
-            });
-        // get line chart canvas
-        var buyers = (document.getElementById('buyers').getContext('2d'));
-        // draw line chart
-        var buyersLineChart = new Chart(buyers).Line(buyerData);
+      var selectedExercise = document.getElementById('uebungSelect').value;
+      $.ajax({
+        url: 'ajaxPHPs/select_exercise_chart.php',
+        type: 'POST',
+        dataType: "json",
+        data: {}
+      }).done(function(data) {
+        var obj = JSON.parse(data);
+        var i, options = "<option>Alle</option>";
+        for(i=0;i<obj.length;i++) {
+          options += "<option>"+obj[i].uebung+"</option>";
+        }
+        document.getElementById('uebungSelect').innerHTML = options;
+        updateSelection();
+      });
+      function updateSelection() {
+        selectedExercise = document.getElementById('uebungSelect').value;
+        updateChart();
+      }
 
         //###################################################################################################################################
 
         var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-        var beginDate;
-        var endDate;
+        var beginDate ="";
+        var endDate="";
 
         var begin = $('#dpd1').datepicker({
             onRender: function(date) {
@@ -153,48 +147,49 @@
             }
         }).on('changeDate', function(ev) {
             end.hide();
+            //Format date to match database ("yyyy-mm-dd")
             var year = ev.date.getFullYear();
-              var month = ev.date.getMonth()+1;
-              var day = ev.date.getDate();
-              if(month < 10) { month = "0"+month;}
-              if(day <10) { day = "0"+day;}
-              endDate = year+"-"+month+"-"+day;
-            $.ajax({
-                url: 'update_chart_data.php',
-                type: 'POST',
-                dataType: "json",
-                data: {
-                    begin: beginDate,
-                    end: endDate
-                }
-            }).done(function(data){
-                var obj = JSON.parse(data);
-                var i;
-                var labels = new Array(obj.length);
-                for(i=0;i<obj.length;i++) {
-                    labels[i] = obj[i].datum;
-                }
-                var data = new Array(obj.length);
-                for(i=0;i<obj.length;i++) {
-                    data[i] = obj[i].gewicht;
-                }
-                buyerData = {
-                    labels : labels,
-                    datasets : [
-                    {
-                        fillColor : "rgba(172,194,132,0.4)",
-                        labelColor: "#fff",
-                        strokeColor : "#ACC26D",
-                        pointColor : "#fff",
-                        pointStrokeColor : "#9DB86D",
-                        data : data
-                    }
-                    ]
-                }
-                buyersLineChart.destroy();
-                buyersLineChart = new Chart(buyers).Line(buyerData);
-            });
+            var month = ev.date.getMonth()+1;
+            var day = ev.date.getDate();
+            if(month < 10) { month = "0"+month;}
+            if(day <10) { day = "0"+day;}
+            endDate = year+"-"+month+"-"+day;
+            updateChart();
         }).data('datepicker');
+
+        function updateChart() {
+          $.ajax({
+              url: 'ajaxPHPs/update_chart_data.php',
+              type: 'POST',
+              dataType: "json",
+              data: {
+                  begin: beginDate,
+                  end: endDate,
+                  selectedExercise: selectedExercise
+              }
+          }).done(function(data){
+              repaintChart(JSON.parse(data));
+          });
+        }
+
+        function repaintChart(obj) {
+          var i;
+          //add the dates from entries to the label array
+          var labels = new Array(obj.length);
+          for(i=0;i<obj.length;i++) {
+              labels[i] = obj[i].datum;
+          }
+          //add the weight from entries to the data array
+          var data = new Array(obj.length);
+          for(i=0;i<obj.length;i++) {
+              data[i] = obj[i].gewicht;
+          }
+          chartData.labels = labels;
+          chartData.datasets[0].data = data;
+          //destroy old chart and build a new one
+          statsLineChart.destroy();
+          statsLineChart = new Chart(stats).Line(chartData);
+        }
     </script>
 </body>
 </html>

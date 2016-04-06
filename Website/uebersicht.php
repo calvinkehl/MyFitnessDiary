@@ -85,7 +85,7 @@
       element.value = date;
 
       $.ajax({
-        url: 'date_picked.php',
+        url: 'ajaxPHPs/date_picked.php',
         type: 'POST',
         dataType: "json",
         data: {
@@ -120,7 +120,7 @@
       var date = element.value;
 
       $.ajax({
-        url: 'date_picked.php',
+        url: 'ajaxPHPs/date_picked.php',
         type: 'POST',
         dataType: "json",
         data: {
@@ -176,7 +176,7 @@
       var date = element.value;
       var a;
       $.ajax({
-        url: 'del_current.php',
+        url: 'ajaxPHPs/del_current.php',
         type: 'POST',
         dataType: 'json',
         data: {
@@ -195,7 +195,7 @@
           /* do nothing */
         } else {
           $.ajax({
-            url: 'save.php',
+            url: 'ajaxPHPs/save.php',
             type: 'POST',
             dataType: 'json',
             data: {

@@ -1,4 +1,4 @@
-<?php require_once './auth.php'; ?>
+<?php require_once '../auth.php'; ?>
 <?php 
 $mysqli = @new mysqli('localhost', 'root', '', 'MyFitnessDiary');
 
@@ -7,9 +7,8 @@ if ($mysqli->connect_error) {
   echo json_encode($message['error']);
 } else {
   $query = sprintf(
-    "SELECT * FROM data WHERE username = '%s' AND Datum = '%s'",
-    $_SESSION['user']['username'],
-    $_POST['date']
+    "SELECT Uebung FROM data WHERE username = '%s'",
+    $_SESSION['user']['username']
     );
   $result = $mysqli->query($query);
   if(empty($result)) {
@@ -18,7 +17,7 @@ if ($mysqli->connect_error) {
     $resultArray = "[";
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
       if($resultArray != "[") {$resultArray .=",";}
-      $resultArray .= '{"uebung":"'.$row['Uebung'].'","geraet":"'.$row['Geraet'].'","gewicht":"'.$row['Gewicht'].'","wiederholungen":"'.$row['Wiederholungen'].'"}';
+      $resultArray .= '{"uebung":"'.$row['Uebung'].'"}';
     }
     $resultArray .= "]";
     $return = $resultArray;

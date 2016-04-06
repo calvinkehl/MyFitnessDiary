@@ -1,5 +1,5 @@
 <?php
-	require_once './auth.php';
+	require_once '../auth.php';
 	$mysqli = @new mysqli('localhost', 'root', '', 'MyFitnessDiary');
   	if ($mysqli->connect_error) {
 		$message['error'] = 'Datenbankverbindung fehlgeschlagen: ' . $mysqli->connect_error;
