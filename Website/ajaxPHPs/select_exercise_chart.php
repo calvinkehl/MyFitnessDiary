@@ -7,7 +7,7 @@ if ($mysqli->connect_error) {
   echo json_encode($message['error']);
 } else {
   $query = sprintf(
-    "SELECT Uebung FROM data WHERE username = '%s'",
+    "SELECT Uebung FROM data WHERE username = '%s' GROUP BY Uebung",
     $_SESSION['user']['username']
     );
   $result = $mysqli->query($query);

@@ -46,7 +46,8 @@
             <div class="col-md-4">
                 <input type="text" class="span2" value="" id="dpd1"></input>
                 <input type="text" class="span2" value="" id="dpd2"></input>
-                <select id="uebungSelect" onchange="updateSelection()">
+                <input class="btn btn-primary" id="btnClearDate" name="clear" type="submit" value="Clear Date" onClick="clearDate();" />
+                <select id="uebungSelect" onchange="updateSelection();">
                 </select>
             </div>
             <div class="col-md-8">
@@ -190,6 +191,14 @@
           //destroy old chart and build a new one
           statsLineChart.destroy();
           statsLineChart = new Chart(stats).Line(chartData);
+        }
+
+        function clearDate() {
+          beginDate = "";
+          endDate = "";
+          document.getElementById('dpd1').value="";
+          document.getElementById('dpd2').value="";
+          updateChart();
         }
     </script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
