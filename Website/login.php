@@ -61,7 +61,7 @@ if (isset($_SESSION['login'])) {
 </head>
 <body>
 
-	<div class="page-header" style="text-align: center;">
+	<div id="page-header">
   		<h1>Wilkommen bei My Fitness Diary!</h1>
   		<h3>alle Ihre eingetragene Daten auch über unseren Webapplikation anschaubar und änderbar</h3>
 	</div>

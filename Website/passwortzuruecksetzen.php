@@ -63,7 +63,7 @@ if(isset($_GET['send'])) {
 </head>
 <body>
 
-	<div class="page-header" style="text-align: center;">
+	<div id="page-header">
   		<h1>Wilkommen bei My Fitness Diary!</h1>
   		<h3>Hier bekommen Sie Ihren neuen Passwort!</h3>
 	</div>

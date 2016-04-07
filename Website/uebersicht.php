@@ -36,7 +36,8 @@
       </div>
     </nav>
   </div>
-  <div class="page-header" style="text-align: center;">
+    <div id="dummy-nav"></div>
+  <div id="page-header">
     <h1>Übersicht Ihrer Trainings-Eintragen</h1>
   </div>
   <div class="container">

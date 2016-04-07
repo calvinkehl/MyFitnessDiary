@@ -64,7 +64,7 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="page-header" style="text-align: center;">
+	<div id="page-header">
   		<h1>Registrierung</h1>
   	</div>
   	<div class="container">

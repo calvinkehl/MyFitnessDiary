@@ -16,7 +16,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!--Chartjs plugin-->
-    <script src='Chart.min.js'></script>
+    <script src='js/Chart.min.js'></script>
 </head>
 <body>
     <div id="nav-container">
@@ -37,7 +37,8 @@
             </div>
         </nav>
     </div>
-    <div class="page-header" style="text-align: center;">
+    <div id="dummy-nav"></div>
+    <div id="page-header">
         <h1>Statistik</h1>
     </div>
     <div class="container">
@@ -191,5 +192,7 @@
           statsLineChart = new Chart(stats).Line(chartData);
         }
     </script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

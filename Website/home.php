@@ -34,7 +34,8 @@
   </div>
 </nav>
 </div>
-<div class="page-header" style="text-align: center;">
+    <div id="dummy-nav"></div>
+<div id="page-header">
   		<h1>Wilkommen bei My Fitness Diary!</h1>
   		<h3>auf unsere Home-Seite können Sie alle Neuheiten aus dem Fitness-Leben miterleben.</h3>
 	</div>

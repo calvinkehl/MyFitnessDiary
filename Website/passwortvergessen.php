@@ -74,7 +74,7 @@ dein MyFitnessDiary-Team';
 </head>
 <body>
 
-	<div class="page-header" style="text-align: center;">
+	<div id="page-header">
   		<h1>Wilkommen bei My Fitness Diary!</h1>
   		<h3>Passwort vergessen? Kein Problem!</h3>
 	</div>
