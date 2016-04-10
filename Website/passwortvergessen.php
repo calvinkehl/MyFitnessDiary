@@ -106,6 +106,9 @@ dein MyFitnessDiary-Team';
 		</form>
 	</div>
 	</div>
+<footer>
+  <p>&copy; 2016 My Fitness Diary. All Rights Reserved</p>
+</footer>
 </body>
 </html>
 <?php

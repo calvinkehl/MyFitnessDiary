@@ -104,5 +104,8 @@ if (isset($_SESSION['login'])) {
 		</form>
 	</div>
 	</div>
+<footer>
+  <p>&copy; 2016 My Fitness Diary. All Rights Reserved</p>
+</footer>
 </body>
 </html>
