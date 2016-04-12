@@ -16,24 +16,32 @@
 	<!-- In das nachstehende Div werden die Beiträge per Javascript eingefügt -->
 </head>
 <body>
-<div id="nav-container">
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand">My Fitness Diary</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-      <li><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
-      <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-    </ul>
+  <div id="nav-container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">My Fitness Diary</a>
+          <button class="navbar-toggle" data-toggle="collapse" 
+          data-target= ".navHeaderCollapse">
+              <span class = "icon-bar"></span>
+              <span class = "icon-bar"></span>
+              <span class = "icon-bar"></span>
+          </button>
+        </div>
+        <div class = "collapse navbar-collapse navHeaderCollapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
+            <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
-</div>
     <div id="dummy-nav"></div>
 <div id="page-header">
   		<h1>Wilkommen bei My Fitness Diary!</h1>

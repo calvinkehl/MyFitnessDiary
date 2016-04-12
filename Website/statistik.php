@@ -20,22 +20,30 @@
 </head>
 <body>
     <div id="nav-container">
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand">My Fitness Diary</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
-                    <li class="active"><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
-                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                </ul>
-            </div>
-        </nav>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">My Fitness Diary</a>
+            <button class="navbar-toggle" data-toggle="collapse" 
+            data-target= ".navHeaderCollapse">
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+            </button>
+          </div>
+          <div class = "collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav">
+              <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+              <li><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
+              <li class="active"><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
+              <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
     <div id="dummy-nav"></div>
     <div id="page-header">
@@ -44,8 +52,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <input type="text" class="span2" value="" id="dpd1"></input>
-                <input type="text" class="span2" value="" id="dpd2"></input>
+                <input type="text" class="span2" placeholder="Von" value="" id="dpd1"></input>
+                <input type="text" class="span2" placeholder="Bis" value="" id="dpd2"></input>
                 <input class="btn btn-primary" id="btnClearDate" name="clear" type="submit" value="Clear Date" onClick="clearDate();" />
                 <select id="uebungSelect" onchange="updateSelection();">
                 </select>

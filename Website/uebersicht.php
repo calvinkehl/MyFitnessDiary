@@ -23,16 +23,24 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand">My Fitness Diary</a>
+          <button class="navbar-toggle" data-toggle="collapse" 
+          data-target= ".navHeaderCollapse">
+              <span class = "icon-bar"></span>
+              <span class = "icon-bar"></span>
+              <span class = "icon-bar"></span>
+          </button>
         </div>
-        <ul class="nav navbar-nav">
-          <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-          <li class="active"><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
-          <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-        </ul>
+        <div class = "collapse navbar-collapse navHeaderCollapse">
+          <ul class="nav navbar-nav">
+            <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li class="active"><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
+            <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
   </div>
@@ -43,8 +51,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
+        <div id="alertPlaceholder"></div>
         <div class="table" id="overview">
-          <input class="btn btn-primary" name="edit" type="submit" value="Edit" onClick="editFunc();" />
+          <input class="btn btn-primary" id="edit" name="edit" type="submit" value="Edit" onClick="editFunc();" />
           <table id="table" class="table">
             <tr>
               <th>Übung</th>
@@ -116,10 +125,11 @@
 
     var i;
     function editFunc() {
+      document.getElementById('alertPlaceholder').innerHTML = "";
       var element = document.getElementById('date');
       var date = element.value;
       if (date=="") {
-        alert("Select date!");
+        document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-warning fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Achtung!</strong> Bitte ein Datum auswählen!</div>';
         return;
       }
       $.ajax({
@@ -162,6 +172,7 @@
       });
     }
     function discardFunc() {
+      document.getElementById('alertPlaceholder').innerHTML = "";
       var date = document.getElementById('date').value;
       $.ajax({
         url: 'ajaxPHPs/date_picked.php',
@@ -201,6 +212,7 @@
       new_row.insertCell(3).innerHTML = "<input name=\"wiederholungen"+i+"\" type=\"text\" />";
     }
     function saveFunc() {
+      document.getElementById('alertPlaceholder').innerHTML = "";
       var element = document.getElementById('date');
       var uebung;
       var geraet;
@@ -238,12 +250,10 @@
               wiederholungen: wiederholungen.value,
               date: date
             }
-          }).done(function(data) {
-            alert("Data saved!");
           });
         }
       }
-    alert("Data saved!");
+      document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Gespeichert!</strong> Deine Daten wurden gespeichert.</div>';
     }
   </script>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
