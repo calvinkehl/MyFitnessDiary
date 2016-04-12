@@ -70,7 +70,7 @@
     var date_input=$('#datepicker'); //our date input has the name "date" (input[name="date"])
     var container=$('.container').length>0 ? $('.container').parent() : "body";
     var options={
-      format: 'mm/dd/yyyy',
+      format: 'dd-mm-yyyy',
       todayHighlight: true,
       autoclose: true,
     };
@@ -113,13 +113,15 @@
         document.getElementById("table").innerHTML = out;
       });
     });
-  </script>
-  <script>
+
     var i;
     function editFunc() {
       var element = document.getElementById('date');
       var date = element.value;
-
+      if (date=="") {
+        alert("Select date!");
+        return;
+      }
       $.ajax({
         url: 'ajaxPHPs/date_picked.php',
         type: 'POST',
@@ -156,6 +158,36 @@
                     "<td><input class=\"btn btn-primary\" value=\"Abbrechen\" name=\"discard\" type=\"submit\" onClick=\"discardFunc();\" /></td>" +
                     "<td><input class=\"btn btn-primary\" value=\"Speichern\" name=\"save\" type=\"submit\" onClick=\"saveFunc();\" /></td>" +
                   "</tr>";
+        document.getElementById("table").innerHTML = out;
+      });
+    }
+    function discardFunc() {
+      var date = document.getElementById('date').value;
+      $.ajax({
+        url: 'ajaxPHPs/date_picked.php',
+        type: 'POST',
+        dataType: "json",
+        data: {
+          date: date
+        }
+      }).done(function(data){
+        var obj = JSON.parse(data);
+        var i;
+        var out = "<tr>" +
+                    "<th>Übung</th>" +
+                    "<th>Gerät</th>" +
+                    "<th>Gewicht</th>" +
+                    "<th>Wiederholungen</th>" +
+                    "<input id=\"date\" type=\"hidden\" value=\""+date+"\" />" +
+                  "</tr>";
+        for(i=0;i<obj.length;i++) {
+          out +=  "<tr>" +
+                    "<td>" + obj[i].uebung + "</td>" +
+                    "<td>" + obj[i].geraet + "</td>" +
+                    "<td>" + obj[i].gewicht + "</td>" +
+                    "<td>" + obj[i].wiederholungen + "</td>" +
+                  "</tr>";
+        }
         document.getElementById("table").innerHTML = out;
       });
     }
@@ -206,10 +238,12 @@
               wiederholungen: wiederholungen.value,
               date: date
             }
+          }).done(function(data) {
+            alert("Data saved!");
           });
         }
       }
-
+    alert("Data saved!");
     }
   </script>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

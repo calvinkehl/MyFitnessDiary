@@ -9,12 +9,12 @@ if ($mysqli->connect_error) {
   if($_POST['begin']=="" || $_POST['end']=="") {
     if($_POST['selectedExercise']=="Alle") {
       $query = sprintf(
-      "SELECT * FROM data WHERE username = '%s'",
+      "SELECT * FROM data WHERE username = '%s' ORDER BY Datum",
       $_SESSION['user']['username']
       );
     } else {
       $query = sprintf(
-      "SELECT * FROM data WHERE username = '%s' AND Uebung = '%s'",
+      "SELECT * FROM data WHERE username = '%s' AND Uebung = '%s' ORDER BY Datum",
       $_SESSION['user']['username'],
       $_POST['selectedExercise']
       );
@@ -22,14 +22,14 @@ if ($mysqli->connect_error) {
   } else {
     if($_POST['selectedExercise']=="Alle") {
       $query = sprintf(
-      "SELECT * FROM data WHERE username = '%s' AND Datum BETWEEN '%s' AND '%s'",
+      "SELECT * FROM data WHERE username = '%s' AND Datum BETWEEN '%s' AND '%s' ORDER BY Datum",
       $_SESSION['user']['username'],
       $_POST['begin'],
       $_POST['end']
       );
     } else {
       $query = sprintf(
-      "SELECT * FROM data WHERE username = '%s' AND Uebung = '%s' AND Datum BETWEEN '%s' AND '%s'",
+      "SELECT * FROM data WHERE username = '%s' AND Uebung = '%s' AND Datum BETWEEN '%s' AND '%s' ORDER BY Datum",
       $_SESSION['user']['username'],
       $_POST['selectedExercise'],
       $_POST['begin'],

@@ -7,7 +7,7 @@ if ($mysqli->connect_error) {
   echo json_encode($message['error']);
 } else {
     $query = sprintf(
-      "SELECT * FROM data WHERE username = '%s'",
+      "SELECT * FROM data WHERE username = '%s' ORDER BY Datum",
       $_SESSION['user']['username']
       );
   $result = $mysqli->query($query);
