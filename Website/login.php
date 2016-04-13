@@ -89,16 +89,10 @@ if (isset($_SESSION['login'])) {
 	      			<input type="password" class="form-control" name="f[password]" id="passwort" placeholder="Passwort eingeben">
 	    		</div>
 	  		</div>
-			<div class="form-group">
-				<div class="checkbox">
-  					<label><input type="checkbox" value="">Eingeloggt bleiben</label>
-				</div>
-			</div>
 			<div class="from-group">
 				<button type="submit" class="btn btn-default" name="submit">Anmelden</button>
 				<br></br>
 				<a href="registration.php" type="button" class="btn btn-link">Registrieren</a>
-				<br></br>
 				<a href="passwortvergessen.php" type="button" class="btn btn-link">Passwort vergessen</a>
 			</div>
 		</form>
