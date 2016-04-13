@@ -51,7 +51,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <div id="alertPlaceholder"></div>
+        
         <div class="table" id="overview">
           <input class="btn btn-primary" id="edit" name="edit" type="submit" value="Edit" onClick="editFunc();" />
           <table id="table" class="table">
@@ -63,7 +63,12 @@
               <input id="date" type="hidden" />
             </tr>
             <tr>
-              <td>Kein Datum ausgewählt...</td>
+            <div id="alertPlaceholder">
+            <div class="alert alert-info">
+  						<strong>Info!</strong> Bitte wählen Sie zuerst ein Datum aus.
+  					</div>
+  					</div>
+            <td></td>
             </tr>
           </table>
         </div>
