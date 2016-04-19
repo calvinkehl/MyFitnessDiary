@@ -52,8 +52,6 @@
       <script> if (typeof(fg_widgets)==="undefined") fg_widgets = new Array();fg_widgets.push("fgid_c11a88222b43b1bb7f6c0c0e2");</script>
       <script src="http://www.feedgrabbr.com/widget/fgwidget.js"></script>
 		</div>
-	</div>
-</div>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="js/index.js"></script>
 <footer>
