@@ -37,8 +37,15 @@
             <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?></a></li>
-            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            <li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?>
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="user.php">Settings</a></li>
+                  <li><a href="">Profil</a></li>
+                </ul>
+              </li>
+              <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
           </ul>
         </div>
       </div>

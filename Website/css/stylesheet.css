@@ -6,6 +6,11 @@ body {
   	background-size: cover;
   	/*color: white; /*ist weiss*/
 }
+
+.container {
+	padding-bottom: 7vh;
+}
+
 .center {
 	margin: 0 auto;
 	align: center;
