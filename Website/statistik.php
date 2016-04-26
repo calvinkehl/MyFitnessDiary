@@ -42,7 +42,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?>
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="user.php">Settings</a></li>
+                  <li><a href="einstellungen.php">Settings</a></li>
                   <li><a href="">Profil</a></li>
                 </ul>
               </li>
