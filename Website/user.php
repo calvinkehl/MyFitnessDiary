@@ -35,7 +35,7 @@
             <ul class="nav navbar-nav">
               <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
               <li><a href="uebersicht.php"><span class="glyphicon glyphicon-book"></span> Übersicht</a></li>
-              <li class="active"><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
+              <li><a href="statistik.php"><span class="glyphicon glyphicon-stats"></span> Statistik</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li>

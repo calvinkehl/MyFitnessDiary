@@ -57,31 +57,32 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        
-        <div class="table" id="overview">
-          <input class="btn btn-primary" id="edit" name="edit" type="submit" value="Edit" onClick="editFunc();" />
-          <table id="table" class="table">
-            <tr>
-              <th>Übung</th>
-              <th>Gerät</th>
-              <th>Gewicht</th>
-              <th>Wiederholungen</th>
-              <input id="date" type="hidden" />
-            </tr>
-            <tr>
-            <div id="alertPlaceholder">
-            <div class="alert alert-info">
-  						<strong>Info!</strong> Bitte wählen Sie zuerst ein Datum aus.
-  					</div>
-  					</div>
-            <td></td>
-            </tr>
-          </table>
-        </div>
-      </div>
       <div class="col-md-4">
         <div id="datepicker" data-date=""></div>
+      </div>
+      <div class="col-md-8">
+        <div class="table" id="overview">
+          <input class="btn btn-primary" id="edit" name="edit" type="submit" value="Edit" onClick="editFunc();" />
+          <div class="table-responsive">
+            <table id="table" class="table">
+              <tr>
+                <th>Übung</th>
+                <th>Gerät</th>
+                <th>Gewicht</th>
+                <th>Wiederholungen</th>
+                <input id="date" type="hidden" />
+              </tr>
+              <tr>
+              <div id="alertPlaceholder">
+              <div class="alert alert-info">
+    						<strong>Info!</strong> Bitte wählen Sie zuerst ein Datum aus.
+    					</div>
+    					</div>
+              <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

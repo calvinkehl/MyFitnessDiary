@@ -50,6 +50,10 @@ body {
 	height:100%;
 }
 
+td input {
+	width:100%;
+}
+
 #datepicker {
 	display: inline-block;
 	border-radius: 4px;
