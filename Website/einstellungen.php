@@ -54,107 +54,10 @@
   </div>
   <div id="dummy-nav"></div>
   <div id="page-header">
-    <h1>User Konfig</h1>
+    <h1>Einstellungen</h1>
   </div>
   <div class="container">
-    <div class="splitContainer center">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" onClick="loadSplit('1')" href="#split1">Split 1</a></li>
-        <li><a data-toggle="tab" onClick="loadSplit('2')" href="#split2">Split 2</a></li>
-      </ul>
-
-      <div class="tab-content">
-        <div id="split1" class="tab-pane fade in active">
-
-        </div>
-        <div id="split2" class="tab-pane fade">
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    $.ajax({
-      url: 'ajaxPHPs/select_exercise_chart.php',
-      type: 'POST',
-      dataType: "json",
-      data: {
-        split: 1
-      }
-    }).done(function(data){
-      var obj = JSON.parse(data);
-      var out = "<div class=\"table-responsive\">" +
-                  "<table id=\"table\" class=\"table\">" +
-                    "<tr>" +
-                      "<th>Übung</th>" +
-                      "<th>Gerät</th>" +
-                    "</tr>";
-      for(i=0;i<obj.length;i++) {
-            out +=  "<tr>" +
-                      "<td><input name=\"uebung"+i+"\" type=\"text\" value="+obj[i].uebung+"></input></td>" +
-                      "<td><input name=\"geraet"+i+"\" type=\"text\" value="+obj[i].geraet+"></input></td>" +
-                    "</tr>";
-      }
-            out +=  "<tr>" +
-                      "<td><input name=\"uebung"+i+"\" type=\"text\" /></td>" +
-                      "<td><input name=\"geraet"+i+"\" type=\"text\" /></td>" +
-                    "</tr>" +
-                    "<tr id=\"insert\">" +
-                      "<td><input class=\"btn btn-primary\" value=\"+\" name=\"add\" type=\"submit\" onClick=\"addFunc();\" /></td>" +
-                      "<td><input class=\"btn btn-primary\" value=\"Speichern\" name=\"save\" type=\"submit\" onClick=\"saveFunc();\" /></td>" +
-                    "</tr>" +
-                  "</table>" +
-                "</div>";
-      document.getElementById("split1").innerHTML = out;
-    });
-
-    function loadSplit(selected) {
-    $.ajax({
-      url: 'ajaxPHPs/select_exercise_chart.php',
-      type: 'POST',
-      dataType: "json",
-      data: {
-        split: selected
-      }
-    }).done(function(data){
-      var obj = JSON.parse(data);
-      var out = "<div class=\"table-responsive\">" +
-                  "<table id=\"table\" class=\"table\">" +
-                    "<tr>" +
-                      "<th>Übung</th>" +
-                      "<th>Gerät</th>" +
-                    "</tr>";
-      for(i=0;i<obj.length;i++) {
-            out +=  "<tr>" +
-                      "<td><input name=\"uebung"+i+"\" type=\"text\" value="+obj[i].uebung+"></input></td>" +
-                      "<td><input name=\"geraet"+i+"\" type=\"text\" value="+obj[i].geraet+"></input></td>" +
-                    "</tr>";
-      }
-            out +=  "<tr>" +
-                      "<td><input name=\"uebung"+i+"\" type=\"text\" /></td>" +
-                      "<td><input name=\"geraet"+i+"\" type=\"text\" /></td>" +
-                    "</tr>" +
-                    "<tr id=\"insert\">" +
-                      "<td><input class=\"btn btn-primary\" value=\"+\" name=\"add\" type=\"submit\" onClick=\"addFunc();\" /></td>" +
-                      "<td><input class=\"btn btn-primary\" value=\"Speichern\" name=\"save\" type=\"submit\" onClick=\"saveFunc();\" /></td>" +
-                    "</tr>" +
-                  "</table>" +
-                "</div>";
-      document.getElementById("split"+selected).innerHTML = out;
-    });
-    }
-
-    function addFunc() {
-      var insert = document.getElementById('insert');
-      i++;
-      var new_row = insert.parentNode.insertRow( insert.rowIndex);
-      new_row.insertCell(0).innerHTML = "<input name=\"uebung"+i+"\" type=\"text\" />";
-      new_row.insertCell(1).innerHTML = "<input name=\"geraet"+i+"\" type=\"text\" />";
-    }
-
-
     
-  </script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="js/index.js"></script>
   <footer>

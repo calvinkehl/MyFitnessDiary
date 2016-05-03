@@ -18,7 +18,7 @@ if ($mysqli->connect_error) {
     $resultArray = "[";
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
       if($resultArray != "[") {$resultArray .=",";}
-      $resultArray .= '{"uebung":"'.$row['Uebung'].'","geraet":"'.$row['Geraet'].'","gewicht":"'.$row['Gewicht'].'","wiederholungen":"'.$row['Wiederholungen'].'"}';
+      $resultArray .= '{"uebung":"'.$row['Uebung'].'","geraet":"'.$row['Geraet'].'","gewicht":"'.$row['Gewicht'].'","wiederholungen":"'.$row['Wiederholungen'].'", "split":"'.$row['Split'].'"}';
     }
     $resultArray .= "]";
     $return = $resultArray;

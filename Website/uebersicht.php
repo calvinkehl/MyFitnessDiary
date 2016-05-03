@@ -73,12 +73,20 @@
                 <input id="date" type="hidden" />
               </tr>
               <tr>
-              <div id="alertPlaceholder">
-              <div class="alert alert-info">
-    						<strong>Info!</strong> Bitte wählen Sie zuerst ein Datum aus.
-    					</div>
-    					</div>
-              <td></td>
+                <div id="alertPlaceholder">
+                  <div class="alert alert-info">
+        						<strong>Info!</strong> Bitte wählen Sie zuerst ein Datum aus.
+        					</div>
+      					</div>
+                <td></td>
+              </tr>
+              <tr>
+                <div class="splitPane">
+                  <ul class="nav nav-tabs nav-justified">
+                    <li class="active" id="split1"><a href="#" onclick="selectSplit(1);">Split 1</a></li>
+                    <li id="split2"><a href="#" onclick="selectSplit(2);">Split 2</a></li>
+                  </ul>
+                </div>
               </tr>
             </table>
           </div>
@@ -89,6 +97,7 @@
 </div>
 </div>
 <script>
+    var selectedSplit = 1 // global Split Variable
     var date_input=$('#datepicker'); //our date input has the name "date" (input[name="date"])
     var container=$('.container').length>0 ? $('.container').parent() : "body";
     var options={
@@ -98,6 +107,7 @@
     };
     date_input.datepicker(options); //initiali110/26/2015 8:20:59 PM ze plugin
     date_input.datepicker().on('changeDate', function(ev) {
+      document.getElementById('alertPlaceholder').innerHTML = "";
       var element = document.getElementById('date');
       var year = ev.date.getFullYear();
       var month = ev.date.getMonth()+1;
@@ -125,16 +135,59 @@
                     "<input id=\"date\" type=\"hidden\" value=\""+date+"\" />" +
                   "</tr>";
         for(i=0;i<obj.length;i++) {
-          out +=  "<tr>" +
-                    "<td>" + obj[i].uebung + "</td>" +
-                    "<td>" + obj[i].geraet + "</td>" +
-                    "<td>" + obj[i].gewicht + "</td>" +
-                    "<td>" + obj[i].wiederholungen + "</td>" +
-                  "</tr>";
+          if(obj[i].split == selectedSplit) {
+            out +=  "<tr>" +
+                      "<td>" + obj[i].uebung + "</td>" +
+                      "<td>" + obj[i].geraet + "</td>" +
+                      "<td>" + obj[i].gewicht + "</td>" +
+                      "<td>" + obj[i].wiederholungen + "</td>" +
+                    "</tr>";
+          }
         }
         document.getElementById("table").innerHTML = out;
       });
     });
+
+
+    function selectSplit(split) {
+      selectedSplit = split;
+      $('#split1').removeClass('active');
+      $('#split2').removeClass('active');
+      $('#split'+split).addClass('active');
+      //update table
+      var element = document.getElementById('date');
+      var date = element.value;
+
+      $.ajax({
+        url: 'ajaxPHPs/date_picked.php',
+        type: 'POST',
+        dataType: "json",
+        data: {
+          date: date
+        }
+      }).done(function(data){
+        var obj = JSON.parse(data);
+        var i;
+        var out = "<tr>" +
+                    "<th>Übung</th>" +
+                    "<th>Gerät</th>" +
+                    "<th>Gewicht</th>" +
+                    "<th>Wiederholungen</th>" +
+                    "<input id=\"date\" type=\"hidden\" value=\""+date+"\" />" +
+                  "</tr>";
+        for(i=0;i<obj.length;i++) {
+          if(obj[i].split == selectedSplit) {
+            out +=  "<tr>" +
+                      "<td>" + obj[i].uebung + "</td>" +
+                      "<td>" + obj[i].geraet + "</td>" +
+                      "<td>" + obj[i].gewicht + "</td>" +
+                      "<td>" + obj[i].wiederholungen + "</td>" +
+                    "</tr>";
+          }
+        }
+        document.getElementById("table").innerHTML = out;
+      });
+    }
 
     var i;
     function editFunc() {
@@ -162,12 +215,14 @@
                     "<input id=\"date\" type=\"hidden\" value=\""+date+"\" />" +
                   "</tr>";
         for(i=0;i<obj.length;i++) {
-          out +=  "<tr>" +
-                    "<td><input name=\"uebung"+i+"\" type=\"text\" value="+obj[i].uebung+"></input></td>" +
-                    "<td><input name=\"geraet"+i+"\" type=\"text\" value="+obj[i].geraet+"></input></td>" +
-                    "<td><input name=\"gewicht"+i+"\" type=\"text\" value="+obj[i].gewicht+"></input></td>" +
-                    "<td><input name=\"wiederholungen"+i+"\" type=\"text\" value="+obj[i].wiederholungen+"></input></td>" +
-                  "</tr>";
+          if(obj[i].split == selectedSplit) {
+            out +=  "<tr>" +
+                      "<td><input name=\"uebung"+i+"\" type=\"text\" value="+obj[i].uebung+"></input></td>" +
+                      "<td><input name=\"geraet"+i+"\" type=\"text\" value="+obj[i].geraet+"></input></td>" +
+                      "<td><input name=\"gewicht"+i+"\" type=\"text\" value="+obj[i].gewicht+"></input></td>" +
+                      "<td><input name=\"wiederholungen"+i+"\" type=\"text\" value="+obj[i].wiederholungen+"></input></td>" +
+                    "</tr>";
+          }
         }
           out +=  "<tr>" +
                     "<td><input name=\"uebung"+i+"\" type=\"text\" /></td>" +
@@ -205,12 +260,14 @@
                     "<input id=\"date\" type=\"hidden\" value=\""+date+"\" />" +
                   "</tr>";
         for(i=0;i<obj.length;i++) {
-          out +=  "<tr>" +
-                    "<td>" + obj[i].uebung + "</td>" +
-                    "<td>" + obj[i].geraet + "</td>" +
-                    "<td>" + obj[i].gewicht + "</td>" +
-                    "<td>" + obj[i].wiederholungen + "</td>" +
-                  "</tr>";
+          if(obj[i].split == selectedSplit) {
+            out +=  "<tr>" +
+                      "<td>" + obj[i].uebung + "</td>" +
+                      "<td>" + obj[i].geraet + "</td>" +
+                      "<td>" + obj[i].gewicht + "</td>" +
+                      "<td>" + obj[i].wiederholungen + "</td>" +
+                    "</tr>";
+          }
         }
         document.getElementById("table").innerHTML = out;
       });
@@ -238,7 +295,8 @@
         type: 'POST',
         dataType: 'json',
         data: {
-          date: date
+          date: date,
+          split: selectedSplit
         }
       });
       for(a=0;a<=i;a++) {
@@ -246,7 +304,11 @@
         geraet = document.getElementsByName('geraet'+a)[0];
         gewicht = document.getElementsByName('gewicht'+a)[0];
         wiederholungen = document.getElementsByName('wiederholungen'+a)[0];
-        if(uebung.value == "" ||
+        if( uebung == null ||
+            geraet == null ||
+            gewicht == null ||
+            wiederholungen == null ||
+            uebung.value == "" ||
             geraet.value == "" ||
             gewicht.value == "" ||
             wiederholungen.value == "") {
@@ -261,12 +323,16 @@
               geraet: geraet.value,
               gewicht: gewicht.value,
               wiederholungen: wiederholungen.value,
-              date: date
+              date: date,
+              split: selectedSplit
+            }
+          }).done(function(data) {
+            if(data == "success") {
+              document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Gespeichert!</strong> Deine Daten wurden gespeichert.</div>';
             }
           });
         }
       }
-      document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Gespeichert!</strong> Deine Daten wurden gespeichert.</div>';
     }
   </script>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
