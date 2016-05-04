@@ -4,7 +4,7 @@ body {
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-  	/*color: white; /*ist weiss*/
+  	color: white; /*ist weiss*/
 }
 
 .container {
@@ -50,10 +50,6 @@ body {
 	height:100%;
 }
 
-td input {
-	width:100%;
-}
-
 #datepicker {
 	display: inline-block;
 	border-radius: 4px;
@@ -64,6 +60,13 @@ td input {
 #placeholder {
 	height:500px;
 	background: red;
+}
+
+#aktpwd {
+	background-color: #9fe7b6;
+}
+input::placeholder {
+  color: black;
 }
 
 footer {

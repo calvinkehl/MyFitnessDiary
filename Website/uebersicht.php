@@ -41,8 +41,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['user']['username'];?>
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="einstellungen.php">Settings</a></li>
-                  <li><a href="">Profil</a></li>
+                  <li><a href="profil.php">Profil</a></li>
                 </ul>
               </li>
               <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
