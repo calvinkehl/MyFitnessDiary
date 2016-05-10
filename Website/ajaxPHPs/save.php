@@ -3,6 +3,7 @@
 	$mysqli = @new mysqli('localhost', 'root', '', 'MyFitnessDiary');
   	if ($mysqli->connect_error) {
 		$message['error'] = 'Datenbankverbindung fehlgeschlagen: ' . $mysqli->connect_error;
+		$return = "error";
 	} else {
 		$i = 0;
 		$query = sprintf(
@@ -17,6 +18,7 @@
 			$mysqli->real_escape_string($_SESSION['user']['username'])
 		);
 		$mysqli->query($query);
+		$return = "success";
 	}
-	echo "success";
+	echo $return;
 ?>

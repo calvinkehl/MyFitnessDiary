@@ -289,6 +289,7 @@
       var wiederholungen;
       var date = element.value;
       var a;
+      var success = false;
       $.ajax({
         url: 'ajaxPHPs/del_current.php',
         type: 'POST',
@@ -325,12 +326,14 @@
               date: date,
               split: selectedSplit
             }
-          }).done(function(data) {
-            if(data == "success") {
-              document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Gespeichert!</strong> Deine Daten wurden gespeichert.</div>';
-            }
           });
+          success = true;
         }
+      }
+      if(success) {
+        document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Gespeichert!</strong> Deine Daten wurden gespeichert.</div>';
+      } else {
+        document.getElementById('alertPlaceholder').innerHTML = '<div id="alert" class="alert alert-warning fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Fehler!</strong> Ein Fehler beim Speichern ist aufgetreten.</div>';
       }
     }
   </script>
